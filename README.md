@@ -6,10 +6,12 @@ This project aims to detect fake reviews in Amazon product datasets using classi
 The workflow includes data cleaning, feature engineering, heuristic labeling, model training (Logistic Regression, LightGBM), and evaluation.
 
 ## Project Structure
-
+- dataset used https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023 
 - `modeling.ipynb` — Main notebook for data processing, feature engineering, modeling, and evaluation.
 - `export.ipynb` — Data loading, EDA, and export of cleaned datasets.
+- `analysis.ipynb` — In-depth EDA and visualization.
 - `.gitignore` — Ensures `.pkl` files and other large files are not tracked by Git.
+
 
 ## Features Used
 
@@ -19,13 +21,25 @@ The workflow includes data cleaning, feature engineering, heuristic labeling, mo
 - Helpfulness votes
 - Verified purchase status
 - Duplicate review detection
-- User behavior heuristics
+- User behaviour heuristics
+  
+## Key Features & Analysis
+
+- **Text Cleaning:** Lowercasing, punctuation removal, and stopword filtering.
+    
+- **Heuristic Labeling:** Combines metadata and behavioral signals to label likely fake reviews.
+- **EDA:**  
+  - Review length distribution (with and without outliers)
+  - Top words in fake vs. genuine reviews (stopwords removed)
+  - Sentiment analysis by rating
+  - Helpful votes and verified purchase analysis
+  - Duplicate review and top product analysis
 
 ## Models
 
 - Logistic Regression (with class balancing)
 - LightGBM (gradient boosting, handles large/sparse data efficiently)
-- (Optionally) SGDClassifier, RandomForest, SVM
+- (Optionally, no success) SGDClassifier, RandomForest, SVM
 
 ## Results
 
@@ -41,6 +55,13 @@ The workflow includes data cleaning, feature engineering, heuristic labeling, mo
 
 2. Run `export.ipynb` to prepare and clean the dataset.
 3. Run `modeling.ipynb` to train and evaluate models.
+4. Run `analysis.ipynb` for advanced EDA and visualizations.
+
+## Example EDA Visualizations
+
+- Distribution of review lengths (zoomed and log-scaled)
+- Top 10 products by number of reviews (bar plot)
+- Boxplots for helpful votes and sentiment by label
 
 ## Future Plans
 
@@ -57,21 +78,10 @@ The workflow includes data cleaning, feature engineering, heuristic labeling, mo
   - Try deep learning models (BERT or similar, if resources allow)
   - Ensemble multiple models
 
-- **Data Expansion:**  
-  - Apply the pipeline to other product categories (e.g., Beauty, Children)
-  - Combine multiple datasets for better generalization
-
 - **Label Quality:**  
   - Improve heuristic labeling
   - Incorporate manual or crowdsourced annotation for ground truth
 
-- **Deployment:**  
-  - Package the best model for API or batch inference
-  - Prepare for deployment on cloud platforms (e.g., Azure, AWS)
-
-- **Monitoring & Maintenance:**  
-  - Monitor model performance on new data
-  - Regularly retrain with updated datasets
 
 ## License
 
